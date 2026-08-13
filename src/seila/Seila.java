@@ -4,6 +4,8 @@
  */
 package seila;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 /**
  *
  * @author Aluno
@@ -14,7 +16,61 @@ public class Seila {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        Scanner scan = new Scanner(System.in);
+        
+        ArrayList<String> itens = new ArrayList<>();
+        ArrayList<Boolean> fez = new ArrayList<>();
+        int coisao = 0;
+        while (coisao == 0){
+            System.out.println("");
+            System.out.println("Lista de tarefas");
+            System.out.println("1 Adicionar");
+            System.out.println("2 Listar");
+            System.out.println("3 completar");
+            System.out.println("4 deletar");
+            System.out.println("5 encerrar");
+            int atual = scan.nextInt();
+            if (atual == 1){
+                System.out.println("Qual item quer adicionar?");
+
+                scan.nextLine(); 
+
+                String add = scan.nextLine();
+
+                itens.add(add);
+                fez.add(Boolean.FALSE);
+
+                System.out.println("Item adicionado com sucesso!");
+            }else if (atual == 2){
+                System.out.println("");
+                for (int i = 0; i < itens.size(); i++) {
+                    System.out.print(i + "-[");
+                    if (fez.get(i) == Boolean.FALSE){
+                        System.out.print(" ");
+                    }else{
+                        System.out.print("X");
+                    }
+                    System.out.print("] " + itens.get(i));
+                    System.out.println("");
+                }
+            }else if (atual == 3){
+                System.out.println("Qual item quer completar?");
+                int dex = scan.nextInt();
+                fez.set(dex, Boolean.TRUE);
+                System.out.println("Item " + itens.get(dex) + " completado com sucesso!");
+            }else if (atual == 4){
+                System.out.println("Qual item quer deletar?");
+                int dex = scan.nextInt();
+                itens.remove(dex);
+                fez.remove(dex);
+                System.out.println("Item deletado com sucesso!");
+            }else if (atual == 5){
+                System.out.println("Programa encerrado");
+                coisao = 1;
+            }
+        }
+            
+        
     }
     
 }

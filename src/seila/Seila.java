@@ -61,20 +61,31 @@ public class Seila {
                 System.out.println("Qual item quer completar?");
                 int dex = scan.nextInt();
                 dex -= 1;
-                fez.set(dex, Boolean.TRUE);
-                System.out.println("Item " + itens.get(dex) + " completado com sucesso!");
+                if (dex > itens.size() || dex < 0){
+                    System.out.println("Número inválido!");
+                }else{
+                    fez.set(dex, Boolean.TRUE);
+                    System.out.println("Item " + itens.get(dex) + " completado com sucesso!");  
+                }
+                
             }else if (atual == 4){
                 System.out.println("Qual item quer deletar?");
                 int dex = scan.nextInt();
                 dex -= 1;
-                itens.remove(dex);
-                fez.remove(dex);
-                System.out.println("Item deletado com sucesso!");
+                if (dex > itens.size() || dex < 0){
+                    System.out.println("Número inválido!");
+                }else{
+                    itens.remove(dex);
+                    fez.remove(dex);
+                    System.out.println("Item deletado com sucesso!");
+                }
+                
             }else if (atual == 5){
                 System.out.println("Programa encerrado");
                 coisao = 1;
                 
-            
+            }else if (atual < 1 || atual > 5){
+                System.out.println("opção inválida!");
             }
         }
             

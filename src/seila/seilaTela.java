@@ -4,6 +4,10 @@
  */
 package seila;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Aluno
@@ -11,12 +15,24 @@ package seila;
 public class seilaTela extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(seilaTela.class.getName());
-
+    
+    DefaultTableModel model;
+    
+    private static final String CONCLUIDA = "Concluída!";
+    private static final String NAO_CONCLUIDA = "Não concluída!";
+    
+    private final ArrayList<String> tarefas = new ArrayList<>();
+    private final ArrayList<String> tarefasFiltradas = new ArrayList<>();
     /**
      * Creates new form seilaTela
      */
     public seilaTela() {
         initComponents();
+        
+        setLocationRelativeTo(null);
+        
+        
+        model = (DefaultTableModel) jTableTarefa.getModel();
     }
 
     /**
@@ -38,7 +54,8 @@ public class seilaTela extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonAdd.setText("jButton1");
+        jButtonAdd.setText("Adicionar");
+        jButtonAdd.addActionListener(this::jButtonAddActionPerformed);
 
         jComboBoxFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Concluído", "Não Concluído" }));
 
@@ -102,6 +119,56 @@ public class seilaTela extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        // TODO add your handling code here:
+        if (jTextFieldDescTarefa.getText().trim().isEmpty()){
+            JOptionPane.showMessageDialog(null, "A descrição não pode ser vazia :C");
+            return;
+        }
+        
+        if (hasTarefaRepetida(jTextFieldDescTarefa.getText())){
+            JOptionPane.showMessageDialog(null, "A tarefa " + jTextFieldDescTarefa.getText() + " já existe.");
+        }
+        
+        tarefas.add(jTextFieldDescTarefa.getText() + ";" + NAO_CONCLUIDA);
+        
+        preencherTabela();
+        
+        jTextFieldDescTarefa.setText("");
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    public boolean hasTarefaRepetida(String novaTarefa){
+        for (String tarefa : tarefas){
+            String dados[] = tarefa.split(";");
+            if (novaTarefa.toLowerCase().equals(dados[0].toLowerCase())){
+                return true;
+            }
+        }
+        
+        return false;
+    }
+    
+    private void preencherTabela(){
+        ArrayList<String> listaTarefas;
+        
+        if (jComboBoxFiltro.getSelectedIndex() > 0){
+            listaTarefas = tarefasFiltradas;    
+        }else{
+            listaTarefas = tarefas;
+        }
+        
+        model.setRowCount(0);
+        
+        for (String tarefa : listaTarefas){
+            String[] dados = tarefa.split(";");
+            
+            model.addRow(new Object[]{
+                dados[0],
+                dados[1]
+            });
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */

@@ -36,7 +36,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jComboBoxFiltro" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jButtonAddTarefa" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonConcTarefa" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButtonRemoveTarefa" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -62,7 +62,7 @@
               <Component id="jScrollPaneTarefas" min="-2" pref="253" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButtonAddTarefa" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jButtonConcTarefa" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonRemoveTarefa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -131,15 +131,21 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButtonAddTarefa">
+    <Component class="javax.swing.JButton" name="jButtonConcTarefa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Concluir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonConcTarefaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonRemoveTarefa">
       <Properties>
         <Property name="text" type="java.lang.String" value="Remover"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveTarefaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
